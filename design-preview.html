@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拉了么 Design System Preview v1.0</title>
+<style>
+  /* ====== Design Tokens ====== */
+  :root {
+    --cream: #FFF8F0;
+    --warm-white: #FFFBF5;
+    --mint: #A5D6A7;
+    --mint-dark: #66BB6A;
+    --apricot: #FFB74D;
+    --sky: #81D4FA;
+    --text-primary: #4E342E;
+    --text-muted: #8D6E63;
+    --text-on-primary: #FFFFFF;
+    --success: #66BB6A;
+    --warning: #FFB74D;
+    --danger: #EF9A9A;
+    --cyber-bg: #1A1A2E;
+    --cyber-surface: #16213E;
+    --cyber-neon: #00FF88;
+    --cyber-accent: #FF6B6B;
+    --cyber-muted: #7B8D9E;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 24px;
+
+    --shadow-sm: 0 1px 4px rgba(78,52,46,0.06);
+    --shadow-md: 0 2px 12px rgba(78,52,46,0.08);
+    --shadow-lg: 0 4px 20px rgba(102,187,106,0.20);
+    --shadow-xl: 0 8px 32px rgba(78,52,46,0.12);
+
+    --space-xs: 4px; --space-sm: 8px; --space-md: 12px;
+    --space-lg: 16px; --space-xl: 20px; --space-2xl: 24px; --space-3xl: 32px;
+
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #F5F0EB;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  /* ====== Layout ====== */
+  .container { max-width: 800px; margin: 0 auto; padding: var(--space-3xl) var(--space-xl); }
+  header {
+    text-align: center;
+    padding: 48px 20px 32px;
+    background: linear-gradient(135deg, var(--mint-dark), var(--mint));
+    color: white;
+    border-radius: 0 0 32px 32px;
+  }
+  header h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+  header p { opacity: 0.9; font-size: 16px; }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    color: white;
+    padding: 4px 12px;
+    border-radius: var(--radius-xl);
+    font-size: 13px;
+    margin: 4px;
+  }
+
+  section { margin: 40px 0; }
+  h2 {
+    font-size: 24px; font-weight: 700;
+    margin-bottom: 20px; padding-bottom: 8px;
+    border-bottom: 3px solid var(--mint-dark);
+    display: flex; align-items: center; gap: 8px;
+  }
+  h3 { font-size: 18px; font-weight: 600; margin: 24px 0 12px; }
+
+  /* ====== Color Swatches ====== */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+  .swatch {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    background: var(--warm-white);
+  }
+  .swatch-color { height: 80px; position: relative; }
+  .swatch-info { padding: 10px 12px; }
+  .swatch-name { font-weight: 600; font-size: 14px; }
+  .swatch-hex { font-size: 12px; color: var(--text-muted); font-family: monospace; }
+
+  /* ====== Type Samples ====== */
+  .type-sample { margin: 12px 0; display: flex; align-items: baseline; gap: 16px; }
+  .type-label { font-size: 12px; color: var(--text-muted); min-width: 80px; font-family: monospace; }
+  .type-preview { font-size: inherit; line-height: inherit; }
+
+  /* ====== Component Preview ====== */
+  .preview-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin: 16px 0; }
+  .preview-col { display: flex; flex-direction: column; gap: 12px; }
+
+  .btn-primary {
+    width: 100%; max-width: 320px; height: 52px;
+    background: var(--mint-dark); color: white; border: none;
+    border-radius: var(--radius-2xl); font-size: 16px; font-weight: 600;
+    box-shadow: var(--shadow-lg); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: transform 0.15s var(--ease-bounce);
+  }
+  .btn-primary:active { transform: scale(0.97); }
+
+  .btn-secondary {
+    width: 100%; max-width: 320px; height: 48px;
+    background: rgba(165,214,167,0.35); border: none;
+    border-radius: var(--radius-2xl); font-size: 16px; font-weight: 500;
+    color: var(--mint-dark); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+
+  .btn-outline {
+    height: 44px; padding: 0 20px;
+    background: transparent; border: 1px solid var(--mint-dark);
+    border-radius: var(--radius-xl); font-size: 14px; font-weight: 500;
+    color: var(--mint-dark); cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .card {
+    background: var(--warm-white);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    box-shadow: var(--shadow-md);
+    width: 100%; max-width: 320px;
+  }
+  .card-header { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+
+  .chip-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    padding: 6px 14px; border-radius: var(--radius-xl);
+    font-size: 13px; font-weight: 500;
+    border: 1px solid var(--mint-dark);
+    color: var(--mint-dark); background: transparent;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .chip.selected { background: var(--mint-dark); color: white; border-color: var(--mint-dark); }
+
+  .stat-card {
+    background: rgba(165,214,167,0.25);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    width: 100%; max-width: 320px;
+  }
+  .stat-card .stat-emoji { font-size: 20px; }
+  .stat-card .stat-value { font-size: 28px; font-weight: 700; margin: 4px 0; }
+  .stat-card .stat-hint { font-size: 12px; color: var(--text-muted); }
+
+  .text-field {
+    width: 100%; max-width: 320px; height: 48px;
+    border: 1px solid var(--mint);
+    border-radius: var(--radius-md);
+    padding: 0 14px; font-size: 16px;
+    background: white; color: var(--text-primary);
+    outline: none; transition: border-color 0.2s;
+  }
+  .text-field:focus { border-color: var(--mint-dark); box-shadow: 0 0 0 3px rgba(102,187,106,0.15); }
+
+  .toggle-row { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 320px; padding: 8px 0; }
+  .toggle { width: 48px; height: 28px; border-radius: 14px; background: #ccc; position: relative; cursor: pointer; transition: background 0.2s; }
+  .toggle.on { background: var(--mint-dark); }
+  .toggle::after {
+    content: ''; position: absolute; top: 3px; left: 3px;
+    width: 22px; height: 22px; border-radius: 50%; background: white;
+    transition: left 0.2s; box-shadow: var(--shadow-sm);
+  }
+  .toggle.on::after { left: 23px; }
+
+  /* ====== Cyber Mode ====== */
+  .cyber-section {
+    background: var(--cyber-bg);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin: 24px 0;
+  }
+  .cyber-section h3 { color: var(--cyber-neon); margin-top: 0; }
+  .cyber-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+  .cyber-stat {
+    background: var(--cyber-surface);
+    border-radius: var(--radius-md);
+    padding: 14px; text-align: center;
+  }
+  .cyber-stat .val { font-size: 28px; font-weight: 700; color: var(--cyber-neon); font-family: 'JetBrains Mono', monospace; }
+  .cyber-stat .lbl { font-size: 12px; color: var(--cyber-muted); margin-top: 4px; }
+
+  /* ====== Spacing Demo ====== */
+  .space-demo { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+  .space-bar { height: 24px; background: var(--mint); border-radius: var(--radius-sm); }
+  .space-label { font-size: 12px; font-family: monospace; min-width: 60px; }
+  .space-value { font-size: 12px; color: var(--text-muted); }
+
+  /* ====== Footer ====== */
+  footer {
+    text-align: center; padding: 32px; color: var(--text-muted);
+    font-size: 13px; border-top: 1px solid #E8E0D8; margin-top: 48px;
+  }
+
+  .kvp-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; }
+  .kvp-key { color: var(--text-muted); }
+  .kvp-val { font-weight: 600; }
+
+  @media (max-width: 600px) {
+    .container { padding: 16px; }
+    header { padding: 32px 16px 24px; border-radius: 0 0 24px 24px; }
+    header h1 { font-size: 24px; }
+    .swatch-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🧻 拉了么 Design System</h1>
+  <p>搞怪无厘头排便记录 App · 卡通贴纸风 + 数据赛博反差</p>
+  <div style="margin-top:12px">
+    <span class="badge">v1.0</span>
+    <span class="badge">Android Compose</span>
+    <span class="badge">微信小程序</span>
+    <span class="badge">Web H5</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ====== 1. Colors ====== -->
+  <section>
+    <h2>🎨 色彩系统</h2>
+
+    <h3>主色板</h3>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="swatch-color" style="background:var(--cream)"></div><div class="swatch-info"><div class="swatch-name">Cream 米黄</div><div class="swatch-hex">#FFF8F0 · 背景</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--warm-white)"></div><div class="swatch-info"><div class="swatch-name">Warm White</div><div class="swatch-hex">#FFFBF5 · 卡片</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--mint)"></div><div class="swatch-info"><div class="swatch-name">Mint 薄荷绿</div><div class="swatch-hex">#A5D6A7 · 容器</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--mint-dark)"></div><div class="swatch-info"><div class="swatch-name">Mint Dark</div><div class="swatch-hex">#66BB6A · 主按钮</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--apricot)"></div><div class="swatch-info"><div class="swatch-name">Apricot 橙黄</div><div class="swatch-hex">#FFB74D · 强调</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--sky)"></div><div class="swatch-info"><div class="swatch-name">Sky 浅蓝</div><div class="swatch-hex">#81D4FA · 信息</div></div></div>
+    </div>
+
+    <h3>文字色</h3>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="swatch-color" style="background:var(--text-primary)"></div><div class="swatch-info"><div class="swatch-name">Text Primary</div><div class="swatch-hex">#4E342E · 主文字</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--text-muted)"></div><div class="swatch-info"><div class="swatch-name">Text Muted</div><div class="swatch-hex">#8D6E63 · 辅助</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--success)"></div><div class="swatch-info"><div class="swatch-name">Success</div><div class="swatch-hex">#66BB6A</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--warning)"></div><div class="swatch-info"><div class="swatch-name">Warning</div><div class="swatch-hex">#FFB74D</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--danger)"></div><div class="swatch-info"><div class="swatch-name">Danger (柔化)</div><div class="swatch-hex">#EF9A9A</div></div></div>
+    </div>
+  </section>
+
+  <!-- ====== 2. Typography ====== -->
+  <section>
+    <h2>🔤 字体系统</h2>
+    <div class="card">
+      <div class="type-sample"><span class="type-label">3xl · 36px</span><span class="type-preview" style="font-size:36px;font-weight:800;">肠道已完成版本更新</span></div>
+      <div class="type-sample"><span class="type-label">2xl · 28px</span><span class="type-preview" style="font-size:28px;font-weight:700;">今日战报</span></div>
+      <div class="type-sample"><span class="type-label">xl · 22px</span><span class="type-preview" style="font-size:22px;font-weight:600;">带薪拉屎计算器</span></div>
+      <div class="type-sample"><span class="type-label">lg · 18px</span><span class="type-preview" style="font-size:18px;font-weight:500;">今日屎运签</span></div>
+      <div class="type-sample"><span class="type-label">base · 16px</span><span class="type-preview" style="font-size:16px;">今天你释放了吗？要不要来一拉？</span></div>
+      <div class="type-sample"><span class="type-label">sm · 14px</span><span class="type-preview" style="font-size:14px;color:var(--text-muted);">肠道生物钟正在建立</span></div>
+      <div class="type-sample"><span class="type-label">xs · 12px</span><span class="type-preview" style="font-size:12px;color:var(--text-muted);">数据仅供娱乐，不构成医疗建议</span></div>
+      <div class="type-sample"><span class="type-label">mono · 28px</span><span class="type-preview" style="font-size:28px;font-family:'JetBrains Mono',monospace;color:var(--cyber-neon);background:var(--cyber-bg);padding:4px 12px;border-radius:4px;">438</span></div>
+    </div>
+  </section>
+
+  <!-- ====== 3. Spacing ====== -->
+  <section>
+    <h2>📏 间距系统 (4px 基准网格)</h2>
+    <div class="card">
+      <div class="space-demo"><span class="space-label">xs · 4px</span><span class="space-bar" style="width:4px"></span></div>
+      <div class="space-demo"><span class="space-label">sm · 8px</span><span class="space-bar" style="width:8px"></span></div>
+      <div class="space-demo"><span class="space-label">md · 12px</span><span class="space-bar" style="width:12px"></span></div>
+      <div class="space-demo"><span class="space-label">lg · 16px</span><span class="space-bar" style="width:16px"></span></div>
+      <div class="space-demo"><span class="space-label">xl · 20px</span><span class="space-bar" style="width:20px"></span></div>
+      <div class="space-demo"><span class="space-label">2xl · 24px</span><span class="space-bar" style="width:24px"></span></div>
+      <div class="space-demo"><span class="space-label">3xl · 32px</span><span class="space-bar" style="width:32px"></span></div>
+      <div style="margin-top:12px;font-size:13px;color:var(--text-muted);">
+        页边距 20px | 卡间距 16px | 卡片内边距 14px | 按钮高度 52px
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 4. Components ====== -->
+  <section>
+    <h2>🧩 组件库</h2>
+
+    <h3>主按钮 Primary Button</h3>
+    <button class="btn-primary">🚽 今日一拉</button>
+
+    <h3>次要按钮 Secondary Button</h3>
+    <button class="btn-secondary">💰 带薪拉屎计算器</button>
+
+    <h3>描边按钮 Outlined Button</h3>
+    <div class="preview-row">
+      <button class="btn-outline">⭐ 成就</button>
+      <button class="btn-outline">📊 统计</button>
+    </div>
+
+    <h3>卡片 Card</h3>
+    <div class="card">
+      <div class="card-header">🔮 今日屎运签</div>
+      <div>今日屎运：大吉，宜带薪，忌憋。</div>
+    </div>
+
+    <h3>统计卡片 StatCard</h3>
+    <div class="stat-card">
+      <div class="stat-emoji">🔥 连续打卡</div>
+      <div class="stat-value">12 天</div>
+      <div class="stat-hint">肠道生物钟正在建立</div>
+    </div>
+
+    <h3>筛选标签 FilterChip</h3>
+    <div class="chip-row">
+      <span class="chip">小试牛刀</span>
+      <span class="chip selected">略有成果</span>
+      <span class="chip">一泻千里</span>
+      <span class="chip">山崩地裂</span>
+      <span class="chip">核弹级释放</span>
+    </div>
+
+    <h3>输入框 TextField</h3>
+    <input class="text-field" type="text" placeholder="如：杭州" style="margin-top:8px">
+
+    <h3>开关 Toggle</h3>
+    <div class="toggle-row"><span>带薪拉屎</span><span class="toggle on"></span></div>
+    <div class="toggle-row"><span>同步屎友圈</span><span class="toggle"></span></div>
+
+    <h3>KVP 键值对</h3>
+    <div class="card" style="margin-top:8px">
+      <div class="kvp-row"><span class="kvp-key">🔥 连续打卡</span><span class="kvp-val">12 天</span></div>
+      <div class="kvp-row"><span class="kvp-key">📦 累计释放</span><span class="kvp-val">438 次</span></div>
+      <div class="kvp-row"><span class="kvp-key">🪙 屎币</span><span class="kvp-val">260（打卡 +5）</span></div>
+    </div>
+  </section>
+
+  <!-- ====== 5. Home Screen Mock ====== -->
+  <section>
+    <h2>📱 首页模拟 (320px 宽)</h2>
+    <div style="max-width:320px;margin:0 auto;background:var(--cream);border-radius:24px;padding:20px 16px;box-shadow:var(--shadow-xl);">
+
+      <!-- Header -->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:18px;font-weight:600;">👋 嘿，肠道旅人</div>
+        <div style="font-size:13px;color:var(--text-muted);">今天你释放了吗？要不要来一拉？</div>
+      </div>
+
+      <!-- Fortune Card -->
+      <div class="card" style="margin-bottom:12px;">
+        <div class="card-header">🔮 今日屎运签</div>
+        <div>今日梗运：开会前释放，智商在线。</div>
+      </div>
+
+      <!-- Battle Report -->
+      <div class="card" style="margin-bottom:12px;">
+        <div class="card-header">🧨 今日战报</div>
+        <div class="kvp-row"><span class="kvp-key">🔥 连续打卡</span><span class="kvp-val">12 天</span></div>
+        <div class="kvp-row"><span class="kvp-key">📦 累计释放</span><span class="kvp-val">438 次</span></div>
+        <div class="kvp-row"><span class="kvp-key">🪙 屎币</span><span class="kvp-val">260（打卡 +5）</span></div>
+      </div>
+
+      <!-- Primary Button -->
+      <button class="btn-primary" style="margin-bottom:12px;max-width:100%;">今日一拉</button>
+
+      <!-- Secondary -->
+      <button class="btn-secondary" style="margin-bottom:12px;max-width:100%;">💰 带薪拉屎计算器</button>
+
+      <!-- Two Outline Buttons -->
+      <div style="display:flex;gap:12px;">
+        <button class="btn-outline" style="flex:1;justify-content:center;">⭐ 成就</button>
+        <button class="btn-outline" style="flex:1;justify-content:center;">📊 统计</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 6. Cyber Dashboard ====== -->
+  <section>
+    <h2>🖥️ 赛博数据模式 (反差记忆点)</h2>
+    <div class="cyber-section">
+      <h3>📊 肠道系统监控</h3>
+      <div class="cyber-grid">
+        <div class="cyber-stat"><div class="val">438</div><div class="lbl">总释放次数</div></div>
+        <div class="cyber-stat"><div class="val">12</div><div class="lbl">连续打卡天</div></div>
+        <div class="cyber-stat"><div class="val">9</div><div class="lbl">本周次数</div></div>
+        <div class="cyber-stat"><div class="val" style="color:var(--cyber-accent);">44.58</div><div class="lbl">本月带薪收益</div></div>
+      </div>
+      <div style="margin-top:16px;font-size:12px;color:var(--cyber-muted);text-align:center;">
+        ⚡ 数据仅供娱乐 · 不构成医疗建议 · 截图分享给损友
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 7. Radius & Shadow ====== -->
+  <section>
+    <h2>🔲 圆角系统 & 阴影</h2>
+    <div class="preview-row">
+      <div style="width:60px;height:60px;border-radius:var(--radius-sm);background:var(--mint);display:flex;align-items:center;justify-content:center;font-size:11px;">8px</div>
+      <div style="width:60px;height:60px;border-radius:var(--radius-md);background:var(--mint);display:flex;align-items:center;justify-content:center;font-size:11px;">12px</div>
+      <div style="width:60px;height:60px;border-radius:var(--radius-lg);background:var(--mint-dark);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;">16px</div>
+      <div style="width:60px;height:60px;border-radius:var(--radius-xl);background:var(--mint-dark);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;">20px</div>
+      <div style="width:60px;height:60px;border-radius:var(--radius-2xl);background:var(--mint-dark);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;">24px</div>
+    </div>
+    <div class="preview-row" style="margin-top:16px;">
+      <div style="width:100px;height:60px;background:white;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;font-size:11px;">shadow-sm</div>
+      <div style="width:100px;height:60px;background:white;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);display:flex;align-items:center;justify-content:center;font-size:11px;">shadow-md</div>
+      <div style="width:100px;height:60px;background:var(--mint-dark);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;">shadow-lg</div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>🧻 拉了么 Design System v1.0 · Made with ❤️ for Lamele App</p>
+  <p style="margin-top:4px;">Design tokens → design-tokens.json · Stitch prompts → stitch-prompts.md · Full spec → DESIGN.md</p>
+</footer>
+
+</body>
+</html>
