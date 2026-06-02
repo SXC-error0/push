@@ -48,9 +48,10 @@ fun StatsScreen(
         records.count { it.smoothLevel == SmoothLevel.SMOOTH.name } * 100f / records.size
     }
     val paidTotal = PaidPoopMath.monthPaidTotalMillis(records, monthlySalary, workDays, workHours)
+    val paidTotalStr = "%.2f".format(paidTotal)
+    val smoothRateStr = "%.0f".format(smoothRate)
+    val avgDurationStr = "%.1f".format(if (records.isEmpty()) 0f else records.sumOf { it.durationMinutes }.toFloat() / records.size)
     val paidRecords = records.count { it.isPaidPoop }
-    val avgDuration = if (records.isEmpty()) 0f else records.sumOf { it.durationMinutes }.toFloat() / records.size
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -81,13 +82,13 @@ fun StatsScreen(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 MiniStatItem("📌", "总记录", "${records.size} 次", modifier = Modifier.weight(1f))
-                MiniStatItem("💨", "顺畅率", "${"%.0f".format(smoothRate)}%", modifier = Modifier.weight(1f))
+                MiniStatItem("💨", "顺畅率", "$smoothRateStr%", modifier = Modifier.weight(1f))
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                MiniStatItem("⏱️", "平均时长", "${"%.1f".format(avgDuration)} 分", modifier = Modifier.weight(1f))
+                MiniStatItem("⏱️", "平均时长", "$avgDurationStr 分", modifier = Modifier.weight(1f))
                 MiniStatItem("💸", "带薪次数", "$paidRecords 次", modifier = Modifier.weight(1f))
             }
 
@@ -106,7 +107,7 @@ fun StatsScreen(
                         )
                     }
                     Text(
-                        "${"%.0f".format(smoothRate)}%",
+                        "$smoothRateStr%",
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.ExtraBold),
                         color = MaterialTheme.colorScheme.primary,
                     )
@@ -139,7 +140,7 @@ fun StatsScreen(
                             )
                         }
                         Text(
-                            "¥${"%.2f".format(paidTotal)}",
+                            "¥$paidTotalStr",
                             style = MaterialTheme.typography.headlineMedium.copy(
                                 fontWeight = FontWeight.ExtraBold,
                                 color = MaterialTheme.colorScheme.onSurface,

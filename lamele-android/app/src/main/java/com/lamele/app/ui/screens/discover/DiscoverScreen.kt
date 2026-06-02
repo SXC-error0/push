@@ -40,7 +40,7 @@ private data class FeatureEntry(
 )
 
 private val primaryFeatures = listOf(
-    FeatureEntry("排行榜", "看看谁是今天的"最速传说"", "leaderboard", "🏆"),
+    FeatureEntry("排行榜", "看看谁是今天的【最速传说】", "leaderboard", "🏆"),
     FeatureEntry("厕所树洞", "秘密吐槽，悄悄释放", "tree", "🕳️"),
     FeatureEntry("AI 屎诗", "为你的每一次伟大战役赋诗一首", "poetry", "🤖", highlight = true, badge = "NEW"),
     FeatureEntry("肠道人格测试", "解锁你的身体隐藏性格", "gut_test", "🧠"),

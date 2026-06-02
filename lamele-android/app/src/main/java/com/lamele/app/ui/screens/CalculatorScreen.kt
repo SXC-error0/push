@@ -150,6 +150,9 @@ private fun CalculatorBody(
         focusedBorderColor = MaterialTheme.colorScheme.primary,
         unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant,
     )
+    val hourlyStr = "%.2f".format(hourly)
+    val sessionStr = "%.2f".format(session)
+    val monthTotalStr = "%.2f".format(monthTotal)
 
     Column(
         modifier = modifier
@@ -248,7 +251,7 @@ private fun CalculatorBody(
             containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.12f),
         ) {
             Text(
-                "✅ 时薪：${"%.2f".format(hourly)} 元/小时",
+                "✅ 时薪：$hourlyStr 元/小时",
                 style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                 color = MaterialTheme.colorScheme.primary,
             )
@@ -259,7 +262,7 @@ private fun CalculatorBody(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Text(
-                "${"%.2f".format(session)} 元",
+                "$sessionStr 元",
                 style = MaterialTheme.typography.displaySmall.copy(
                     fontWeight = FontWeight.ExtraBold,
                     color = MaterialTheme.colorScheme.primary,
@@ -296,7 +299,7 @@ private fun CalculatorBody(
                         )
                     }
                     Text(
-                        "${"%.2f".format(monthTotal)} 元",
+                        "$monthTotalStr 元",
                         style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.ExtraBold),
                         color = MaterialTheme.colorScheme.onSurface,
                     )
@@ -340,8 +343,8 @@ private fun CalculatorBody(
         OutlinedButton(
             onClick = {
                 val shareText = "【拉了么】带薪拉屎报告\n" +
-                    "本次收益：¥${"%.2f".format(session)}\n" +
-                    "本月累计：¥${"%.2f".format(monthTotal)}\n" +
+                    "本次收益：¥$sessionStr\n" +
+                    "本月累计：¥$monthTotalStr\n" +
                     "——公司欠你的，从厕所拿回来。"
                 val intent = Intent(Intent.ACTION_SEND).apply {
                     type = "text/plain"
@@ -358,7 +361,7 @@ private fun CalculatorBody(
 
         // Footer
         Text(
-            ""上班可以忍，屎不能憋。\n公司欠你的，从厕所拿回来。"",
+            "\"上班可以忍，屎不能憋。\n公司欠你的，从厕所拿回来。\"",
             style = MaterialTheme.typography.bodySmall.copy(fontStyle = FontStyle.Italic),
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
             textAlign = TextAlign.Center,

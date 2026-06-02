@@ -72,6 +72,7 @@ fun SuccessScreen(
             viewModel.workHours.value,
         )
     } else 0f
+    val earnStr = "%.2f".format(earn)
 
     Column(
         modifier = Modifier
@@ -213,7 +214,7 @@ fun SuccessScreen(
                 color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
             ) {
                 Text(
-                    "💸 本次带薪收益：¥${"%.2f".format(earn)}",
+                    "💸 本次带薪收益：¥$earnStr",
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                     style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
                     color = MaterialTheme.colorScheme.primary,
@@ -274,11 +275,12 @@ private inline fun <reified T : Enum<T>> enumLabelSuccess(name: String, label: (
 }
 
 private fun buildSuccessShareText(e: PoopRecordEntity, earn: Float): String = buildString {
+    val earnStr = "%.2f".format(earn)
     appendLine("【拉了么】今日一拉战报 🎉")
     appendLine("量级：${enumLabelSuccess<AmountLevel>(e.amountLevel) { it.label }}")
     appendLine("形状：${enumLabelSuccess<ShapeType>(e.shapeType) { it.label }}")
     appendLine("时长：${e.durationMinutes} 分钟")
     e.aiComment?.let { appendLine("AI 评：$it") }
-    if (e.isPaidPoop && earn > 0f) appendLine("带薪收益：¥${"%.2f".format(earn)}")
+    if (e.isPaidPoop && earn > 0f) appendLine("带薪收益：¥$earnStr")
     appendLine("—— 表面搞怪，内核解压。")
 }

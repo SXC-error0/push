@@ -48,6 +48,7 @@ fun ProfileScreen(
             subtitle = "称号：$title",
         )
 
+        val monthPaidStr = "%.2f".format(monthPaid)
         CuteSectionCard(emoji = "📦", title = "你的战绩") {
             Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 CuteKvp(emoji = "🧷", key = "总打卡", value = "${home.totalCount} 次")
@@ -56,7 +57,7 @@ fun ProfileScreen(
                 CuteKvp(
                     emoji = "💸",
                     key = "本月带薪（估）",
-                    value = "¥${"%.2f".format(monthPaid)}",
+                    value = "¥$monthPaidStr",
                 )
                 CuteKvp(emoji = "🪙", key = "屎币", value = "${home.poopCoins}")
             }

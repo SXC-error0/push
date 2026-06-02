@@ -209,7 +209,7 @@ fun HomeScreen(
 
             // Decorative footer quote
             Text(
-                ""上班可以忍，屎不能憋。\n公司欠你的，从厕所拿回来。"",
+                "\"上班可以忍，屎不能憋。\n公司欠你的，从厕所拿回来。\"",
                 style = MaterialTheme.typography.bodySmall.copy(fontStyle = FontStyle.Italic),
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
                 modifier = Modifier
