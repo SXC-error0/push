@@ -9,12 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Map
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.ShowChart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -94,10 +94,9 @@ class MainActivity : ComponentActivity() {
 
 private enum class MainTab(val label: String) {
     HOME("首页"),
+    STATS("统计"),
+    MAP("地图"),
     DISCOVER("发现"),
-    HISTORY("记录"),
-    MAP("屎迹"),
-    ME("我的"),
 }
 
 @Composable
@@ -121,15 +120,19 @@ private fun LameleNav(vm: AppViewModel) {
                                 Icon(
                                     imageVector = when (item) {
                                         MainTab.HOME -> Icons.Default.Home
-                                        MainTab.DISCOVER -> Icons.Default.Explore
-                                        MainTab.HISTORY -> Icons.Default.List
+                                        MainTab.STATS -> Icons.Default.ShowChart
                                         MainTab.MAP -> Icons.Default.Map
-                                        MainTab.ME -> Icons.Default.Person
+                                        MainTab.DISCOVER -> Icons.Default.Explore
                                     },
                                     contentDescription = item.label,
                                 )
                             },
                             label = { Text(item.label) },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = androidx.compose.ui.graphics.Color(0xFF126D27),
+                                selectedTextColor = androidx.compose.ui.graphics.Color(0xFF126D27),
+                                indicatorColor = androidx.compose.ui.graphics.Color(0xFF66BB6A),
+                            ),
                         )
                     }
                 }
@@ -151,26 +154,17 @@ private fun LameleNav(vm: AppViewModel) {
                         onCheckIn = { navController.navigate("checkin") },
                         onCalculator = { navController.navigate("calculator") },
                         onAchievements = { navController.navigate("achievements") },
-                        onStats = { navController.navigate("stats") },
+                        onHistory = { navController.navigate("history") },
+                        onSettings = { navController.navigate("profile") },
                     )
-                    MainTab.DISCOVER.ordinal -> DiscoverScreen(
-                        onOpen = { r -> navController.navigate(r) },
-                    )
-                    MainTab.HISTORY.ordinal -> HistoryScreen(
-                        records = records,
-                        onOpen = { id -> navController.navigate("success/$id") },
+                    MainTab.STATS.ordinal -> CalculatorScreen(
+                        viewModel = vm,
+                        onBack = {},
+                        showBackButton = false,
                     )
                     MainTab.MAP.ordinal -> MapScreen(records = records, toilets = toilets)
-                    MainTab.ME.ordinal -> ProfileScreen(
-                        home = home,
-                        title = vm.userTitle(),
-                        weekCount = vm.weeklyCount(),
-                        monthPaid = vm.monthPaidTotal(),
-                        onCalculator = { navController.navigate("calculator") },
-                        onAchievements = { navController.navigate("achievements") },
-                        onStats = { navController.navigate("stats") },
-                        onPrivacy = { navController.navigate("privacy") },
-                        onClearData = { vm.clearAllData() },
+                    MainTab.DISCOVER.ordinal -> DiscoverScreen(
+                        onOpen = { r -> navController.navigate(r) },
                     )
                 }
             }
@@ -219,10 +213,30 @@ private fun LameleNav(vm: AppViewModel) {
                     onBack = { navController.popBackStack() },
                 )
             }
+            composable("history") {
+                val records by vm.records.collectAsState()
+                HistoryScreen(
+                    records = records,
+                    onOpen = { id -> navController.navigate("success/$id") },
+                )
+            }
+            composable("profile") {
+                val home by vm.homeState.collectAsState()
+                ProfileScreen(
+                    home = home,
+                    title = vm.userTitle(),
+                    weekCount = vm.weeklyCount(),
+                    monthPaid = vm.monthPaidTotal(),
+                    onCalculator = { navController.navigate("calculator") },
+                    onAchievements = { navController.navigate("achievements") },
+                    onStats = { navController.navigate("stats") },
+                    onPrivacy = { navController.navigate("privacy") },
+                    onClearData = { vm.clearAllData() },
+                )
+            }
             composable("privacy") {
                 PrivacyScreen(viewModel = vm, onBack = { navController.popBackStack() })
             }
-
             composable("leaderboard") {
                 LeaderboardScreen(vm, onBack = { navController.popBackStack() })
             }

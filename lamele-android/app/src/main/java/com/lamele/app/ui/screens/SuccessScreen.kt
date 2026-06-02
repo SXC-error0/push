@@ -1,24 +1,25 @@
 package com.lamele.app.ui.screens
 
 import android.content.Intent
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.Icon
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,23 +27,23 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.lamele.app.data.local.PoopRecordEntity
 import com.lamele.app.domain.PaidPoopMath
 import com.lamele.app.model.AmountLevel
-import com.lamele.app.model.ColorType
-import com.lamele.app.model.MoodType
-import com.lamele.app.model.SceneType
 import com.lamele.app.model.ShapeType
 import com.lamele.app.model.SmoothLevel
+import com.lamele.app.model.SceneType
 import com.lamele.app.ui.AppViewModel
-import com.lamele.app.ui.components.CuteKvp
-import com.lamele.app.ui.components.CuteSectionCard
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import com.lamele.app.ui.components.StickerCard
+import com.lamele.app.ui.components.hardShadow
 
 @Composable
 fun SuccessScreen(
@@ -56,138 +57,228 @@ fun SuccessScreen(
     LaunchedEffect(recordId) {
         entity = viewModel.fetchRecord(recordId)
     }
-    val e = entity
-    if (e == null) {
-        Text("加载中…", modifier = Modifier.padding(24.dp))
+    val e = entity ?: run {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Text("加载中…", style = MaterialTheme.typography.bodyLarge)
+        }
         return
     }
-    val salary = viewModel.monthlySalary.value
-    val days = viewModel.workDays.value
-    val hours = viewModel.workHours.value
+
     val earn = if (e.isPaidPoop) {
-        PaidPoopMath.sessionEarnings(e.durationMinutes, salary, days, hours)
-    } else {
-        0f
-    }
-    val successLine = remember {
-        listOf(
-            "今日一拉，世界少了一份压力。",
-            "马桶已接收你的情绪垃圾。",
-            "你不是在拉屎，你是在重启系统。",
-        ).random()
-    }
-    var expanded by remember { mutableStateOf(false) }
+        PaidPoopMath.sessionEarnings(
+            e.durationMinutes,
+            viewModel.monthlySalary.value,
+            viewModel.workDays.value,
+            viewModel.workHours.value,
+        )
+    } else 0f
+
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
             .verticalScroll(rememberScrollState())
-            .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+            .padding(horizontal = 20.dp)
+            .padding(top = 40.dp, bottom = 32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
-        Text("打卡成功", style = MaterialTheme.typography.headlineLarge)
+        // Celebration emoji
+        Text("🎉", fontSize = 64.sp)
+
+        // Headline
         Text(
-            successLine,
-            style = MaterialTheme.typography.bodyLarge,
+            "恭喜你，成功卸下人生负担",
+            style = MaterialTheme.typography.headlineSmall.copy(
+                fontWeight = FontWeight.ExtraBold,
+            ),
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurface,
         )
-        CuteSectionCard(emoji = "🤖", title = "AI 屎评") {
-            Text(e.aiComment ?: "", style = MaterialTheme.typography.bodyLarge)
-        }
 
-        CuteSectionCard(emoji = "🧾", title = "本次记录（简版面板）") {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                val fmt = remember { SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA) }
-
-                CuteKvp(emoji = "⏰", key = "时间", value = fmt.format(Date(e.timeMillis)))
-                CuteKvp(emoji = "⏳", key = "时长", value = "${e.durationMinutes} 分钟")
-                e.city?.let { city ->
-                    CuteKvp(emoji = "🗺️", key = "城市", value = city)
-                }
-                CuteKvp(
-                    emoji = "🎭",
-                    key = "场景/量级/形状",
-                    value = "${enumLabel<SceneType>(e.sceneType) { it.label }} · " +
-                        "${enumLabel<AmountLevel>(e.amountLevel) { it.label }} · " +
-                        "${enumLabel<ShapeType>(e.shapeType) { it.label }}"
-                )
-                CuteKvp(
-                    emoji = "💸",
-                    key = "带薪",
-                    value = if (e.isPaidPoop) "是（薅回走起）" else "否（纯享）",
-                )
-
-                if (expanded) {
-                    e.colorType?.let { c ->
-                        CuteKvp(
-                            emoji = "🎨",
-                            key = "颜色",
-                            value = enumLabel<ColorType>(c) { it.label },
-                        )
-                    }
-                    CuteKvp(
-                        emoji = "💨",
-                        key = "顺畅",
-                        value = enumLabel<SmoothLevel>(e.smoothLevel) { it.label },
+        // Stats 2x2 grid
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                StickerCard(withShadow = false) {
+                    Text(
+                        "时长",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
-                    CuteKvp(
-                        emoji = "😊",
-                        key = "心情",
-                        value = enumLabel<MoodType>(e.mood) { it.label },
+                    Text(
+                        "${e.durationMinutes} 分钟",
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.primary,
                     )
-                    if (e.isPaidPoop) {
-                        CuteKvp(
-                            emoji = "🧧",
-                            key = "本次薅回（娱乐）",
-                            value = "¥${"%.2f".format(earn)}",
-                        )
-                    }
-                    e.note?.let { note ->
-                        CuteKvp(emoji = "📝", key = "备注", value = note)
-                    }
                 }
-
-                OutlinedButton(
-                    onClick = { expanded = !expanded },
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(if (expanded) "收起明细" else "展开明细")
+                StickerCard(withShadow = false) {
+                    Text(
+                        "形状",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Text(
+                        enumLabelSuccess<ShapeType>(e.shapeType) { it.label },
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+            }
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                StickerCard(withShadow = false) {
+                    Text(
+                        "量级",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    Text(
+                        enumLabelSuccess<AmountLevel>(e.amountLevel) { it.label },
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+                StickerCard(withShadow = false) {
+                    Text(
+                        "顺畅度",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    val smoothEmoji = runCatching { enumValueOf<SmoothLevel>(e.smoothLevel).emoji }.getOrDefault("🌿")
+                    Text(
+                        "${enumLabelSuccess<SmoothLevel>(e.smoothLevel) { it.label }} $smoothEmoji",
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.primary,
+                    )
                 }
             }
         }
-        Button(
-            onClick = {
-                val share = buildShareText(e, earn)
-                val send = Intent(Intent.ACTION_SEND).apply {
-                    type = "text/plain"
-                    putExtra(Intent.EXTRA_TEXT, share)
-                }
-                context.startActivity(Intent.createChooser(send, "分享今日一拉"))
-            },
-            modifier = Modifier.fillMaxWidth(),
+
+        // AI comment card
+        StickerCard(
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.15f),
         ) {
-            Icon(Icons.Default.Share, contentDescription = null)
-            Text(" 分享卡片（文本）", modifier = Modifier.padding(start = 8.dp))
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalAlignment = Alignment.Top,
+            ) {
+                Text("🤖", fontSize = 20.sp)
+                Column {
+                    Text(
+                        "AI 屎评官",
+                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.tertiary,
+                    )
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        e.aiComment ?: "今日表现稳定，继续保持！",
+                        style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
+                        color = MaterialTheme.colorScheme.onSurface,
+                    )
+                }
+            }
         }
-        FilledTonalButton(onClick = onHome, modifier = Modifier.fillMaxWidth()) {
-            Text("回首页")
+
+        // Coins earned
+        Surface(
+            shape = RoundedCornerShape(50),
+            color = MaterialTheme.colorScheme.secondaryContainer,
+            border = BorderStroke(2.dp, MaterialTheme.colorScheme.secondary.copy(alpha = 0.4f)),
+        ) {
+            Row(
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                Text("🪙", fontSize = 22.sp)
+                Text(
+                    "+5 屎币",
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.ExtraBold),
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                )
+            }
         }
-        OutlinedButton(onClick = onAgain, modifier = Modifier.fillMaxWidth()) {
-            Text("再记一笔")
+
+        if (e.isPaidPoop && earn > 0f) {
+            Surface(
+                shape = RoundedCornerShape(8.dp),
+                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+            ) {
+                Text(
+                    "💸 本次带薪收益：¥${"%.2f".format(earn)}",
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
+                    color = MaterialTheme.colorScheme.primary,
+                )
+            }
+        }
+
+        Spacer(Modifier.height(4.dp))
+
+        // Action buttons
+        Button(
+            onClick = onAgain,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(52.dp)
+                .hardShadow(MaterialTheme.colorScheme.primary.copy(alpha = 0.35f)),
+            shape = RoundedCornerShape(50),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            ),
+        ) {
+            Text(
+                "再来一拉 ↺",
+                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                fontSize = 16.sp,
+            )
+        }
+
+        OutlinedButton(
+            onClick = {
+                val shareText = buildSuccessShareText(e, earn)
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, shareText)
+                }
+                context.startActivity(Intent.createChooser(intent, "分享今日战报"))
+            },
+            modifier = Modifier.fillMaxWidth().height(48.dp),
+            shape = RoundedCornerShape(50),
+            border = BorderStroke(2.dp, MaterialTheme.colorScheme.outlineVariant),
+        ) {
+            Text("📤 生成分享卡片", style = MaterialTheme.typography.labelLarge)
+        }
+
+        OutlinedButton(
+            onClick = onHome,
+            modifier = Modifier.fillMaxWidth().height(48.dp),
+            shape = RoundedCornerShape(50),
+            border = BorderStroke(2.dp, MaterialTheme.colorScheme.outlineVariant),
+        ) {
+            Text("🏠 返回首页", style = MaterialTheme.typography.labelLarge)
         }
     }
 }
 
-private inline fun <reified T : Enum<T>> enumLabel(name: String, label: (T) -> String): String {
-    return try {
-        label(enumValueOf<T>(name))
-    } catch (_: Exception) {
-        name
-    }
+private inline fun <reified T : Enum<T>> enumLabelSuccess(name: String, label: (T) -> String): String {
+    return try { label(enumValueOf(name)) } catch (_: Exception) { name }
 }
 
-private fun buildShareText(e: PoopRecordEntity, earn: Float): String = buildString {
-    appendLine("【拉了么】今日一拉战报")
-    appendLine(enumLabel<ShapeType>(e.shapeType) { it.label })
-    appendLine(e.aiComment ?: "")
-    if (e.isPaidPoop) appendLine("本次带薪释放估算：¥${"%.2f".format(earn)}")
+private fun buildSuccessShareText(e: PoopRecordEntity, earn: Float): String = buildString {
+    appendLine("【拉了么】今日一拉战报 🎉")
+    appendLine("量级：${enumLabelSuccess<AmountLevel>(e.amountLevel) { it.label }}")
+    appendLine("形状：${enumLabelSuccess<ShapeType>(e.shapeType) { it.label }}")
+    appendLine("时长：${e.durationMinutes} 分钟")
+    e.aiComment?.let { appendLine("AI 评：$it") }
+    if (e.isPaidPoop && earn > 0f) appendLine("带薪收益：¥${"%.2f".format(earn)}")
     appendLine("—— 表面搞怪，内核解压。")
 }
