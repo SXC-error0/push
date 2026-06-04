@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sticker-border {
+            border: 2px solid rgba(30, 27, 23, 0.1);
+        }
+        .hard-shadow {
+            box-shadow: 4px 4px 0px 0px #126d27;
+        }
+        .hard-shadow-secondary {
+            box-shadow: 4px 4px 0px 0px #835500;
+        }
+        .tilt-1 { transform: rotate(-2deg); }
+        .tilt-2 { transform: rotate(1.5deg); }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#40493e",
+                      "outline": "#707a6d",
+                      "surface": "#fff8f1",
+                      "inverse-surface": "#33302b",
+                      "inverse-primary": "#83da85",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#5eb3d8",
+                      "on-tertiary-container": "#004358",
+                      "surface-container": "#f4ede5",
+                      "primary-fixed-dim": "#83da85",
+                      "on-secondary-fixed": "#291800",
+                      "error": "#ba1a1a",
+                      "primary-container": "#66bb6a",
+                      "surface-container-low": "#f9f3eb",
+                      "background": "#fff8f1",
+                      "on-secondary-container": "#704800",
+                      "surface-dim": "#dfd9d1",
+                      "primary-fixed": "#9ff79f",
+                      "on-primary-container": "#004814",
+                      "on-error": "#ffffff",
+                      "on-primary-fixed": "#002105",
+                      "secondary-fixed": "#ffddb4",
+                      "surface-tint": "#126d27",
+                      "error-container": "#ffdad6",
+                      "outline-variant": "#bfcaba",
+                      "on-primary-fixed-variant": "#005318",
+                      "tertiary-fixed-dim": "#7ed1f7",
+                      "tertiary": "#006685",
+                      "surface-container-highest": "#e8e1da",
+                      "secondary-fixed-dim": "#ffb954",
+                      "secondary": "#835500",
+                      "secondary-container": "#feb64c",
+                      "inverse-on-surface": "#f7f0e8",
+                      "on-tertiary-fixed": "#001f2a",
+                      "on-secondary-fixed-variant": "#633f00",
+                      "on-background": "#1e1b17",
+                      "tertiary-fixed": "#bee9ff",
+                      "on-surface": "#1e1b17",
+                      "surface-variant": "#e8e1da",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#fff8f1",
+                      "on-primary": "#ffffff",
+                      "primary": "#126d27",
+                      "on-tertiary-fixed-variant": "#004d65",
+                      "surface-container-high": "#eee7df",
+                      "on-secondary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "sm": "8px",
+                      "margin-mobile": "20px",
+                      "gutter": "12px",
+                      "md": "16px",
+                      "xs": "4px",
+                      "xl": "32px",
+                      "lg": "24px"
+              },
+              "fontFamily": {
+                      "body-sm": ["Be Vietnam Pro"],
+                      "body-lg": ["Be Vietnam Pro"],
+                      "label-caps": ["Be Vietnam Pro"],
+                      "display-mobile": ["Be Vietnam Pro"],
+                      "headline-md": ["Be Vietnam Pro"],
+                      "display-lg": ["Be Vietnam Pro"]
+              },
+              "fontSize": {
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "500"}],
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "display-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                      "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                      "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-lg text-body-lg min-h-screen pb-32">
+<!-- Header Section (TopAppBar) -->
+<header class="w-full top-0 sticky z-40 bg-background border-b-2 border-outline-variant flex justify-between items-center px-margin-mobile py-sm">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center border-2 border-on-background overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A cute, expressive cartoon character avatar with a playful adventuring outfit and a bright apricot-colored background. The character has a cheerful expression, perfectly fitting the Gen-Z 'mou' aesthetic, presented as a high-quality digital sticker with clean lines and soft, vibrant colors consistent with a playful mobile app identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvWVVxZM4bJ7tKUBknX802QZN7s_xMCAlI7ugvgFfu4q3npxydM__wgUGmVjpfKAaT6Kmx9DvdwI9GKg1m3Zi3xzwLYmqXmufqnCqHuIlf2nSDtDtyNQ1EUSneOvGcJmseHk7YEPcEk6HxsnSEnIFVMt87i1qaQL3SPuU4yt5uUzQIlIHNaj_tqwuRglbc-8zUZHpGZTSYEvIswizTll79ukRsudSnedzUGq7xnBv_6YBHAXGp8jUQ4XE3kgjs1oeWqafvuXII-jNG"/>
+</div>
+<span class="font-display-mobile text-display-mobile text-primary tracking-tight">拉了么</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant/10 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-primary" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="px-margin-mobile pt-lg flex flex-col gap-lg">
+<!-- Result Card -->
+<div class="bg-surface-container-lowest rounded-xl p-lg sticker-border flex flex-col items-center relative overflow-hidden">
+<!-- Decorative Stickers -->
+<div class="absolute -top-2 -left-2 tilt-1 bg-tertiary-container text-on-tertiary-container px-sm py-xs rounded-lg text-label-caps font-label-caps border-2 border-on-background z-10">
+                测试结果
+            </div>
+<div class="mt-lg mb-md animate-float">
+<div class="w-48 h-48 rounded-full bg-primary-container/20 border-4 border-dashed border-primary/30 flex items-center justify-center relative">
+<img alt="Personality Avatar" class="w-40 h-40 drop-shadow-xl" data-alt="A charming and dynamic cartoon character representing a high-speed personality, styled like a 3D digital sticker. The character features vibrant mint green accents and a sleek, aerodynamic design that evokes a sense of efficiency and speed. The lighting is soft and cheerful, placed against a warm cream background that highlights its playful and energetic Gen-Z aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4zpdA2lJIAnSiKM4ruJWi55zoiOhSXMiCRrx1RuwJVFBNXs93oUSEclaPzk_kmqb5jmlkSimeNGQJv_6CevntTgiN6YD6pWnpLL0dQjsmYcoTbQTYuzRlWiLHczpOc22dctab8i_45BiwMHPKCqbdqW1M2yWUQrwzYGhqkpls637PcnN-rjT4C5jkaIz0Z4bqKSXtriH5Nl6oauIAKEEoigXQdEB2Sl6qHDNxmkHL9HZlhFvjq3vZU12CfXJzXQVei-L8VjxENBMu"/>
+<div class="absolute bottom-2 right-2 bg-secondary-container p-2 rounded-full border-2 border-on-background">
+<span class="text-2xl">⚡</span>
+</div>
+</div>
+</div>
+<div class="text-center mb-md">
+<h1 class="font-display-lg text-display-lg text-primary mb-xs">闪电跑者</h1>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Flash Runner</p>
+</div>
+<!-- Personality Tags -->
+<div class="flex flex-wrap justify-center gap-sm mb-lg">
+<span class="bg-primary-container/20 text-primary px-md py-xs rounded-full border-2 border-primary/20 font-label-caps text-label-caps">#效率之王</span>
+<span class="bg-secondary-container/20 text-secondary px-md py-xs rounded-full border-2 border-secondary/20 font-label-caps text-label-caps">#赛博思考者</span>
+<span class="bg-tertiary-container/20 text-tertiary px-md py-xs rounded-full border-2 border-tertiary/20 font-label-caps text-label-caps">#速战速决</span>
+</div>
+<!-- Analysis Box -->
+<div class="bg-surface-container rounded-xl p-md border-2 border-dashed border-outline-variant w-full text-center">
+<p class="font-body-lg text-body-lg italic text-on-surface leading-relaxed">
+                    “你肠道里的员工都在打‘极速版’工！你的身体就像一台精密的法拉利，从输入到输出主打一个‘不留遗憾’。你是带薪如厕界的闪电，办公室摸鱼的克星。”
+                </p>
+</div>
+</div>
+<!-- Action Section -->
+<div class="flex flex-col gap-md">
+<button class="w-full bg-primary-container text-on-primary-container font-headline-md text-headline-md py-md rounded-full hard-shadow flex items-center justify-center gap-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all" onclick="simulateShare()">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+                生成分享卡片
+            </button>
+<a class="w-full bg-secondary-container text-on-secondary-container font-headline-md text-headline-md py-md rounded-full border-2 border-on-background hard-shadow-secondary flex items-center justify-center gap-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+                返回主页
+            </a>
+</div>
+<!-- Fun Facts Bento -->
+<div class="grid grid-cols-2 gap-md mt-sm">
+<div class="bg-tertiary-container/10 p-md rounded-xl sticker-border tilt-1">
+<span class="text-2xl mb-xs block">🏆</span>
+<h3 class="font-headline-md text-headline-md text-tertiary mb-xs">超越 98%</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">全国各地的厕所选手</p>
+</div>
+<div class="bg-primary-container/10 p-md rounded-xl sticker-border tilt-2">
+<span class="text-2xl mb-xs block">🌿</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-xs">肠道清新度</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">犹如森林里的清晨</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface rounded-t-xl shadow-[0_-4px_0_0_rgba(0,0,0,0.05)] border-t-2 border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 transition-all duration-200 ease-in-out active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-caps text-label-caps">首页</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 border-2 border-primary transition-all duration-200 ease-in-out active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-label-caps text-label-caps">统计</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 transition-all duration-200 ease-in-out active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-caps text-label-caps">地图</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 transition-all duration-200 ease-in-out active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-caps text-label-caps">发现</span>
+</a>
+</nav>
+<!-- Floating Toast for Interactivity -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-lg py-sm rounded-full font-label-caps text-label-caps opacity-0 pointer-events-none transition-opacity duration-300" id="shareToast">
+        正在为你生成专属贴纸卡片...
+    </div>
+<script>
+        function simulateShare() {
+            const toast = document.getElementById('shareToast');
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        // Simple parallax or tilt effect for stickers could be added here
+        document.querySelectorAll('.sticker-border').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+            });
+        });
+    </script>
+</body></html>

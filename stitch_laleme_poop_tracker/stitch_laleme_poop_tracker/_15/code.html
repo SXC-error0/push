@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>肠道人格测试 - 拉了么</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#66bb6a",
+                    "tertiary-fixed": "#bee9ff",
+                    "primary-fixed-dim": "#83da85",
+                    "tertiary-container": "#5eb3d8",
+                    "outline": "#707a6d",
+                    "secondary-container": "#feb64c",
+                    "inverse-primary": "#83da85",
+                    "inverse-on-surface": "#f7f0e8",
+                    "tertiary-fixed-dim": "#7ed1f7",
+                    "outline-variant": "#bfcaba",
+                    "on-secondary-fixed": "#291800",
+                    "inverse-surface": "#33302b",
+                    "primary-fixed": "#9ff79f",
+                    "on-primary-fixed-variant": "#005318",
+                    "on-primary-fixed": "#002105",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e8e1da",
+                    "surface-bright": "#fff8f1",
+                    "secondary": "#835500",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#eee7df",
+                    "on-secondary-container": "#704800",
+                    "on-primary-container": "#004814",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#004d65",
+                    "surface-tint": "#126d27",
+                    "on-secondary-fixed-variant": "#633f00",
+                    "background": "#fff8f1",
+                    "surface-container-low": "#f9f3eb",
+                    "on-surface-variant": "#40493e",
+                    "on-background": "#1e1b17",
+                    "surface-dim": "#dfd9d1",
+                    "secondary-fixed-dim": "#ffb954",
+                    "primary": "#126d27",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#006685",
+                    "surface": "#fff8f1",
+                    "surface-variant": "#e8e1da",
+                    "surface-container": "#f4ede5",
+                    "on-tertiary-fixed": "#001f2a",
+                    "on-tertiary-container": "#004358",
+                    "secondary-fixed": "#ffddb4",
+                    "on-surface": "#1e1b17"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "sm": "8px",
+                    "gutter": "12px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Be Vietnam Pro"],
+                    "label-caps": ["Be Vietnam Pro"],
+                    "display-mobile": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "display-lg": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "display-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                    "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                    "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sticker-border {
+            border: 2px solid rgba(112, 122, 109, 0.1);
+        }
+        .hard-shadow-sm {
+            box-shadow: 4px 4px 0px 0px rgba(112, 122, 109, 0.1);
+        }
+        .hard-shadow-active {
+            box-shadow: 4px 4px 0px 0px #126d27;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-4px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-lg min-h-screen flex flex-col">
+<!-- Top AppBar -->
+<header class="w-full top-0 sticky bg-surface border-b-2 border-outline-variant flex justify-between items-center px-margin-mobile h-16 z-40">
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-container-high transition-colors rounded-full active:scale-95 duration-100">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</button>
+<h1 class="font-display-mobile text-display-mobile text-primary">拉了么</h1>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-container-high transition-colors rounded-full active:scale-95 duration-100">
+<span class="material-symbols-outlined text-primary">settings</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow px-margin-mobile pt-lg pb-32 max-w-md mx-auto w-full">
+<!-- Progress Section -->
+<div class="mb-xl">
+<div class="flex justify-between items-end mb-sm">
+<span class="font-headline-md text-primary bg-primary-container/20 px-4 py-1 rounded-full border-2 border-primary/10">Question 1/5</span>
+<span class="text-body-sm text-on-surface-variant font-bold">快到终点了！🏃‍♂️</span>
+</div>
+<div class="relative h-4 bg-surface-container-highest rounded-full sticker-border overflow-visible">
+<!-- Progress Fill -->
+<div class="absolute left-0 top-0 h-full bg-primary-container rounded-full transition-all duration-500" style="width: 20%;"></div>
+<!-- Poop Runner -->
+<div class="absolute top-1/2 -translate-y-1/2 transition-all duration-500 flex flex-col items-center" style="left: 20%; transform: translate(-50%, -50%);">
+<span class="text-2xl animate-float">💩</span>
+</div>
+</div>
+</div>
+<!-- Question Card -->
+<div class="bg-surface-container-lowest rounded-xl p-lg sticker-border hard-shadow-sm mb-lg relative overflow-hidden">
+<div class="absolute -top-4 -right-4 text-6xl opacity-10 rotate-12 select-none">⚡</div>
+<h2 class="font-headline-md-mobile text-headline-md-mobile text-secondary leading-relaxed mb-md">
+                如果你在开会时感觉“洪荒之力”将至，你的第一反应是？
+            </h2>
+<p class="text-body-sm text-on-surface-variant italic">不要犹豫，跟随你的直觉（和肠道）...</p>
+</div>
+<!-- Options Grid -->
+<div class="space-y-md">
+<!-- Option A -->
+<button class="w-full flex items-center gap-md p-md bg-surface-container-low rounded-xl sticker-border hover:bg-primary-container/10 transition-all active:scale-[0.98] text-left group" onclick="selectOption(this)">
+<div class="w-12 h-12 flex items-center justify-center bg-secondary-container rounded-lg text-2xl group-hover:scale-110 transition-transform">⚔️</div>
+<div>
+<div class="font-bold text-on-surface">战神降世</div>
+<div class="text-body-sm text-on-surface-variant">当场镇定自若，寻找脱身之策。</div>
+</div>
+</button>
+<!-- Option B -->
+<button class="w-full flex items-center gap-md p-md bg-surface-container-low rounded-xl sticker-border hover:bg-primary-container/10 transition-all active:scale-[0.98] text-left group" onclick="selectOption(this)">
+<div class="w-12 h-12 flex items-center justify-center bg-tertiary-fixed rounded-lg text-2xl group-hover:scale-110 transition-transform">🕵️</div>
+<div>
+<div class="font-bold text-on-surface">策略大师</div>
+<div class="text-body-sm text-on-surface-variant">默默观察领导表情，等待最佳空档。</div>
+</div>
+</button>
+<!-- Option C -->
+<button class="w-full flex items-center gap-md p-md bg-surface-container-low rounded-xl sticker-border hover:bg-primary-container/10 transition-all active:scale-[0.98] text-left group" onclick="selectOption(this)">
+<div class="w-12 h-12 flex items-center justify-center bg-primary-fixed rounded-lg text-2xl group-hover:scale-110 transition-transform">🎤</div>
+<div>
+<div class="font-bold text-on-surface">灵魂歌手</div>
+<div class="text-body-sm text-on-surface-variant">假装咳嗽，用节奏掩盖生理律动。</div>
+</div>
+</button>
+<!-- Option D -->
+<button class="w-full flex items-center gap-md p-md bg-surface-container-low rounded-xl sticker-border hover:bg-primary-container/10 transition-all active:scale-[0.98] text-left group" onclick="selectOption(this)">
+<div class="w-12 h-12 flex items-center justify-center bg-error-container rounded-lg text-2xl group-hover:scale-110 transition-transform">🏳️</div>
+<div>
+<div class="font-bold text-on-surface">弃疗选手</div>
+<div class="text-body-sm text-on-surface-variant">人生苦短，随它去吧。</div>
+</div>
+</button>
+</div>
+<!-- Secondary Action -->
+<div class="mt-lg flex justify-center">
+<button class="text-on-surface-variant font-bold py-2 px-6 rounded-full hover:bg-surface-container-high transition-colors active:scale-95">
+                跳过此题
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-low border-t-2 border-outline-variant shadow-[0_-4px_0_0_rgba(0,0,0,0.05)] flex justify-around items-center h-20 px-4 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-primary-container/50 transition-colors Active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">首页</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-primary-container/50 transition-colors Active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-label-caps text-label-caps">数据</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-primary-container/50 transition-colors Active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">distance</span>
+<span class="font-label-caps text-label-caps">地图</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-primary-container/50 transition-colors Active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-caps text-label-caps">发现</span>
+</a>
+</nav>
+<script>
+        function selectOption(element) {
+            // Remove selection from others
+            document.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('bg-primary-container/20', 'border-primary', 'hard-shadow-active');
+            });
+            // Add selection to clicked
+            element.classList.add('bg-primary-container/20', 'border-primary', 'hard-shadow-active');
+            
+            // Decorative effect
+            const rect = element.getBoundingClientRect();
+            createBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        }
+
+        function createBurst(x, y) {
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.innerHTML = '✨';
+                particle.className = 'fixed pointer-events-none text-xl z-50';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                document.body.appendChild(particle);
+
+                const angle = (i / 8) * Math.PI * 2;
+                const velocity = 4 + Math.random() * 4;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+
+                let opacity = 1;
+                let currentX = x;
+                let currentY = y;
+
+                function animate() {
+                    currentX += vx;
+                    currentY += vy;
+                    opacity -= 0.02;
+                    particle.style.left = currentX + 'px';
+                    particle.style.top = currentY + 'px';
+                    particle.style.opacity = opacity;
+
+                    if (opacity > 0) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        particle.remove();
+                    }
+                }
+                animate();
+            }
+        }
+    </script>
+</body></html>

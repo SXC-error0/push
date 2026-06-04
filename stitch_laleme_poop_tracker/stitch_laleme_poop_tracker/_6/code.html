@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Lamele - 排行榜</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#001f2a",
+                        "primary-fixed-dim": "#83da85",
+                        "primary-container": "#66bb6a",
+                        "outline-variant": "#bfcaba",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#704800",
+                        "surface-container-low": "#f9f3eb",
+                        "on-secondary-fixed": "#291800",
+                        "surface-variant": "#e8e1da",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1e1b17",
+                        "surface-container-highest": "#e8e1da",
+                        "on-surface": "#1e1b17",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffddb4",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#fff8f1",
+                        "tertiary-fixed-dim": "#7ed1f7",
+                        "secondary-container": "#feb64c",
+                        "primary-fixed": "#9ff79f",
+                        "primary": "#126d27",
+                        "on-surface-variant": "#40493e",
+                        "inverse-on-surface": "#f7f0e8",
+                        "tertiary-fixed": "#bee9ff",
+                        "outline": "#707a6d",
+                        "surface": "#fff8f1",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#33302b",
+                        "secondary": "#835500",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#eee7df",
+                        "secondary-fixed-dim": "#ffb954",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#002105",
+                        "inverse-primary": "#83da85",
+                        "tertiary-container": "#5eb3d8",
+                        "on-primary-container": "#004814",
+                        "tertiary": "#006685",
+                        "surface-tint": "#126d27",
+                        "on-primary-fixed-variant": "#005318",
+                        "background": "#fff8f1",
+                        "on-tertiary-fixed-variant": "#004d65",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "surface-container": "#f4ede5",
+                        "on-tertiary-container": "#004358",
+                        "surface-dim": "#dfd9d1",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "unit": "4px",
+                        "margin-mobile": "20px",
+                        "gutter": "12px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Be Vietnam Pro"],
+                        "display-mobile": ["Be Vietnam Pro"],
+                        "label-caps": ["Be Vietnam Pro"],
+                        "display-lg": ["Be Vietnam Pro"],
+                        "body-sm": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "display-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .sticker-border {
+            border: 2px solid rgba(64, 73, 62, 0.1);
+        }
+        .hard-shadow-sm {
+            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+        }
+        .hard-shadow-md {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .podium-gradient {
+            background: linear-gradient(180deg, #FFFBF5 0%, #F4EDE5 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-lg min-h-screen pb-[120px]">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-40 bg-surface border-b-2 border-outline-variant shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] flex justify-between items-center px-margin-mobile py-sm">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden sticker-border">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A cute, colorful 3D-style cartoon avatar of a cheerful adventurer with a green cap and a warm smile. The character is set against a soft cream background, maintaining a playful sticker aesthetic with bold outlines and vibrant colors that match a youthful, Gen-Z digital scrapbooking theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD70d0aYgY1IKwkUAh8NC9FhejBWO1rz-rIePOTcxZsKrzqagGmgYSnJ9gTqNC0wIrmEGZqDQJ3RLOxDDzX2w8hRD8JvbE5FMXrSDfdEmZsFYiYx1sS_m_DmGEG75xQChEDAuf6Vya9IOh_Vfb77fmNsEfj4pXMMRhlWoGN2K9hS-iC6gtuzuXpl2pe39kQKO5vorPcs-XNq_VguS6JLB_pV8S6AQW6EXOSvRs5q934iBR3XnwdoEi7MteYURY_kZIbpYGU8n2Jk-Ci"/>
+</div>
+<h1 class="font-display-mobile text-display-mobile text-primary">排行榜</h1>
+</div>
+<button class="material-symbols-outlined text-primary p-2 transition-transform active:scale-95">settings</button>
+</header>
+<!-- Filter Chips -->
+<nav class="flex overflow-x-auto no-scrollbar gap-sm px-margin-mobile py-md items-center">
+<button class="flex-shrink-0 px-lg py-xs rounded-full bg-primary-container text-on-primary-container border-2 border-primary hard-shadow-sm font-label-caps text-label-caps transition-all active:scale-90">附近</button>
+<button class="flex-shrink-0 px-lg py-xs rounded-full bg-surface-container border-2 border-outline-variant text-on-surface-variant font-label-caps text-label-caps transition-all hover:bg-secondary-container/30">好友</button>
+<button class="flex-shrink-0 px-lg py-xs rounded-full bg-surface-container border-2 border-outline-variant text-on-surface-variant font-label-caps text-label-caps transition-all hover:bg-secondary-container/30">带薪收益</button>
+<button class="flex-shrink-0 px-lg py-xs rounded-full bg-surface-container border-2 border-outline-variant text-on-surface-variant font-label-caps text-label-caps transition-all hover:bg-secondary-container/30">公司/学校</button>
+</nav>
+<!-- Top 3 Podium Section -->
+<section class="px-margin-mobile mb-xl">
+<div class="flex items-end justify-center gap-gutter pt-xl">
+<!-- Rank 2 -->
+<div class="flex flex-col items-center w-1/3">
+<div class="relative mb-sm">
+<span class="absolute -top-4 left-1/2 -translate-x-1/2 text-2xl">🥈</span>
+<div class="w-16 h-16 rounded-full border-4 border-outline-variant overflow-hidden sticker-border -rotate-2">
+<img alt="Rank 2" class="w-full h-full bg-tertiary-container/20" data-alt="A stylized 3D cartoon avatar of a trendy young woman with pastel hair and a cool expression. The image is designed like a collectible digital sticker with a thick white border, set against a warm white background with soft, diffused lighting and a high-contrast aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeDt3MO4YEft6QMleNNQS6OHizF-ez51Qe78vSVTjFB3CqpunZ2ew4bRGrl46MRvwDH1jBu5H6QUdBgCw6SpWPydxgrcO0aFFXgwFWu0aWAJhpsiI-lKrHFWhhyipu_i3PaPQVc7l7e2UaWCoS9U-GFXKLQNK-wqEV6w_e6sJ5Kg2fC-oiUne4Wb3-cmsjptOUAO-L6OxchaZLLJIw-pa61jyLUdGlwYmQ8nFdJEAinFnb0DNxt_JeK6PuaNJcX-U0e_xgrJSkPICq"/>
+</div>
+</div>
+<div class="podium-gradient w-full h-24 rounded-t-xl border-t-2 border-x-2 border-outline-variant flex flex-col items-center pt-sm text-center">
+<span class="font-headline-md text-headline-md-mobile text-primary leading-tight">李大壮</span>
+<span class="font-label-caps text-[10px] text-secondary">8天连胜</span>
+</div>
+</div>
+<!-- Rank 1 -->
+<div class="flex flex-col items-center w-1/3">
+<div class="relative mb-sm scale-110">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-4xl drop-shadow-md">👑</span>
+<div class="w-20 h-20 rounded-full border-4 border-secondary-container overflow-hidden sticker-border rotate-2">
+<img alt="Rank 1" class="w-full h-full bg-primary-container/20" data-alt="An energetic 3D cartoon character avatar with bright expressions and stylized features. The character is wearing a golden crown, symbolizing a winner. The art style is thick-lined, high-saturation, and playful, resembling a high-quality physical sticker against a clean cream-colored background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCS-VpQmn4VY_F-o-alZnM-JIYV7ObWcg96CaomfLlwjav3KpARf5ouI5AEjmYe64I5aTdJuNlmrQj7xZQUf1LT91-RyVUjRFPk7p4VFUzTK-sO6N2vQG8SWGdoXPvgIB8CDz_wLuHbuy9HvW-EAoN2ataq0lT4POWbpAYiIBd1XS-QqagV2pGbfFRnqjowvEt8VuNrc6PeFGxhTLH30p21bNtf1gkp3fQd8d8AQ0dKTB7qVvZs194NuMmkYvF1kn9VDtVUGh9VHD-"/>
+</div>
+</div>
+<div class="bg-primary-container w-full h-32 rounded-t-xl border-t-2 border-x-2 border-primary flex flex-col items-center pt-sm text-center hard-shadow-sm">
+<span class="font-headline-md text-headline-md-mobile text-on-primary-container leading-tight">带薪摸鱼王</span>
+<span class="font-label-caps text-[10px] text-on-primary-container/80">🏆 12天连胜</span>
+</div>
+</div>
+<!-- Rank 3 -->
+<div class="flex flex-col items-center w-1/3">
+<div class="relative mb-sm">
+<span class="absolute -top-4 left-1/2 -translate-x-1/2 text-2xl">🥉</span>
+<div class="w-16 h-16 rounded-full border-4 border-[#CD7F32]/50 overflow-hidden sticker-border rotate-3">
+<img alt="Rank 3" class="w-full h-full bg-secondary-container/20" data-alt="A friendly and cute 3D cartoon avatar of a young professional wearing trendy glasses. The image is framed as a die-cut sticker with a heavy outline. The lighting is warm and bright, consistent with a cheerful, gamified leaderboard interface in a light-mode layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU68YqcBhvutcjIs5-z86Xuy1jiqOncZzFtZMmz-d0CDAfOF94RTsSy46tuoNcdrdTrCwmOiy1VUVZNFI4dzPPcLs7RgaAkDWahCxXRgfUBbrov7YrdhXpIjtPrNW-1-wTNSs6QzewEpLlXxDpGJnFwc3moGp2fFZsBFBieO8KbAi5ayiTuoLI6C7o1ZDTrFQoHXO1Io11evMm49MElPT5KbmRmVpXBKtkeE1HEe0j1c5R9Yg4mjPEA1uCromZP9hOLVUIiBxsPfd-"/>
+</div>
+</div>
+<div class="podium-gradient w-full h-20 rounded-t-xl border-t-2 border-x-2 border-outline-variant flex flex-col items-center pt-sm text-center">
+<span class="font-headline-md text-headline-md-mobile text-primary leading-tight">拉不出来</span>
+<span class="font-label-caps text-[10px] text-secondary">5天连胜</span>
+</div>
+</div>
+</div>
+</section>
+<!-- List View -->
+<main class="px-margin-mobile space-y-md">
+<!-- List Item 4 -->
+<div class="flex items-center gap-md p-md bg-surface-container-lowest rounded-xl border-2 border-outline-variant sticker-border">
+<span class="font-headline-md text-headline-md text-outline italic w-6">4</span>
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-outline-variant">
+<img alt="Rank 4" class="w-full h-full" data-alt="A simple, clean 3D cartoon avatar of a young person with short hair. The style is minimal but playful, featuring a thick outline and a warm color palette. The character has a neutral yet friendly expression, suitable for a mobile app leaderboard entry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9HQQyvePG8Sr-7TJ0SwXBvH59MgYkDP1L93H_8seWLoZ6trSRhygfdWyhzwJCizOdOSpJsz_uqtmWVNchddi89dWeKYOLHBNEDT-v7AQBTIf5snukRQ9Xhu7dA-dqbpBKEZDxwdjGVj6ljU0lzcsRGUoXkb2y4UKDe4mRRqwz4mIAMeLS6To3sosJ3fl2HFWMKezWuG-PajOeELhfPkEreCO48XxzO8QIK6h2f7fxorOG3LGsx_91D_cRRs2ugW9tMz9UOiVKhWmO"/>
+</div>
+<div class="flex-grow">
+<h3 class="font-body-lg text-body-lg text-on-surface">努力的一天</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">收益: 12.5 💰</p>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md text-primary">88%</span>
+</div>
+</div>
+<!-- List Item 5 -->
+<div class="flex items-center gap-md p-md bg-surface-container-lowest rounded-xl border-2 border-outline-variant sticker-border">
+<span class="font-headline-md text-headline-md text-outline italic w-6">5</span>
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-outline-variant">
+<img alt="Rank 5" class="w-full h-full" data-alt="A quirky and cute 3D cartoon avatar of a character with a messy bun and large round glasses. The art style uses bold lines and soft shadows to create a physical sticker effect. The palette features soft oranges and teals, maintaining visual interest in a list format." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj-sVPgNUGAhl2e2rSULLI90wqGdsZA4Q05p7YDX-gB6SX-0N5LpYMGvdPGiP4jI7usSVa9RDvHGIXPi1nQ37FPZm4_p4QImQ0gw05zWk3UPr6zuPttHGP2i98wv-KSH6z8gcPXKR3nx9P-UH-4iol9w-n0jdL_UZ0RMCtESHK-uedaUU50in6zFe6y4ZoSeQ9vLnAVWTPAp-S7v_E9dVzuGHNpLz_dOm3VTKkRj2_foPfgkoYGx1Q3aQ8QLulI5eo0Gi8UaYMtltc"/>
+</div>
+<div class="flex-grow">
+<h3 class="font-body-lg text-body-lg text-on-surface">快乐小神龙</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">收益: 11.2 💰</p>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md text-primary">85%</span>
+</div>
+</div>
+<!-- Highlighted ME (Rank 88) -->
+<div class="flex items-center gap-md p-md bg-secondary-container rounded-xl border-2 border-secondary hard-shadow-md sticker-border -mx-2 px-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-1 bg-on-secondary-container text-white text-[8px] font-bold rotate-12 translate-x-1 -translate-y-1">ME</div>
+<span class="font-headline-md text-headline-md text-on-secondary-container italic w-6">88</span>
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-on-secondary-container bg-surface rotate-3">
+<img alt="Me Avatar" class="w-full h-full" data-alt="A cartoon avatar sticker of a person with a green cap, representing the current user. The style is high-contrast with a thick stroke, placed inside a bright yellow-orange container to signal importance. The mood is energetic and celebratory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCst93ATUota0IS6ixRhWUejcftPbDcFUdRH9Xo71vLbsIgCIlJIyStEhb8BSbgyidxR_QPKbVZvyCafLX7H_t4VmM-3Z7FfcXovG96GLSdL_PAfcYk4T4TKrIdK9pTxiBqnRbDYboYWnub85gDIMKcQwp91Mohl9n_YOq4J9jOq03AmGNjRZzbUe4CTzqbSuOkTZf6AfoP76biyF83VJdvyBjGmlRJvHx1gPCxp3lnBmB44FZUbwx3ETpFpmu1Uzn3bo1Da07e4U-_"/>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-secondary-container">我本人</h3>
+<p class="font-body-sm text-body-sm text-on-secondary-container/80">收益: 2.1 💰</p>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md text-on-secondary-container">73%</span>
+</div>
+</div>
+<!-- List Item 6 -->
+<div class="flex items-center gap-md p-md bg-surface-container-lowest rounded-xl border-2 border-outline-variant sticker-border">
+<span class="font-headline-md text-headline-md text-outline italic w-6">6</span>
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-outline-variant">
+<img alt="Rank 6" class="w-full h-full" data-alt="A simplistic 3D cartoon avatar of a person wearing a beanie. The design is bold and clean, following the scrapbook sticker aesthetic with high-key lighting and a cheerful disposition. The background of the avatar is a subtle tonal shift from the primary cream." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG49RK3rTHKK9LROFqtEBy0QNBJydxZC6DMiK8O2EZjLyOqcKLn-7racyrWNVlVm16iFnomLJmpVwXHgDGxxXK_mOh7wzWCCG2v0Yr2YGhTHi6IYS4sphECWXLZZNtDaiUoGI7CPIf0l9vGipLc_Mb_x8sgmiMhAE7-gi89hjd7LMp8ESvBJrOdqdTXk5UBvwvttPI7llkC995tUxJVBzrbzTt_bsJUBYwt7qjXmyvudJscXb8bQ6WqUQs-V7a6gzbqF9A0c_DVmCx"/>
+</div>
+<div class="flex-grow">
+<h3 class="font-body-lg text-body-lg text-on-surface">坐班狂人</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">收益: 10.8 💰</p>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md text-primary">82%</span>
+</div>
+</div>
+</main>
+<!-- Sticky My Rank Bar -->
+<div class="fixed bottom-[84px] left-0 w-full px-margin-mobile z-40">
+<div class="bg-primary-container text-on-primary-container p-md rounded-full border-2 border-primary hard-shadow-md flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+<p class="font-body-lg text-body-lg">你的排名：第88名，击败了 73% 的战士</p>
+</div>
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest border-t-2 border-outline-variant shadow-[0_-4px_0px_0px_rgba(0,0,0,0.05)] flex justify-around items-center px-sm py-xs pb-safe">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-secondary-container/30 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-caps text-label-caps">主页</span>
+</a>
+<!-- Statistics - Active -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-lg py-xs border-2 border-primary shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-label-caps text-label-caps">统计</span>
+</a>
+<!-- Map -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-secondary-container/30 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="font-label-caps text-label-caps">地图</span>
+</a>
+<!-- Discover -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-secondary-container/30 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-caps text-label-caps">发现</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for filter chips
+        const chips = document.querySelectorAll('nav button');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => {
+                    c.classList.remove('bg-primary-container', 'text-on-primary-container', 'border-primary', 'hard-shadow-sm');
+                    c.classList.add('bg-surface-container', 'border-outline-variant', 'text-on-surface-variant');
+                });
+                chip.classList.add('bg-primary-container', 'text-on-primary-container', 'border-primary', 'hard-shadow-sm');
+                chip.classList.remove('bg-surface-container', 'border-outline-variant', 'text-on-surface-variant');
+            });
+        });
+
+        // Simple parallax-like tilt effect for stickers on scroll
+        window.addEventListener('scroll', () => {
+            const stickers = document.querySelectorAll('.sticker-border');
+            stickers.forEach((s, i) => {
+                const speed = 0.05;
+                const yPos = -(window.scrollY * speed);
+                if (i % 2 === 0) {
+                    s.style.transform = `translateY(${yPos}px) rotate(1deg)`;
+                } else {
+                    s.style.transform = `translateY(${yPos}px) rotate(-1deg)`;
+                }
+            });
+        });
+    </script>
+</body></html>

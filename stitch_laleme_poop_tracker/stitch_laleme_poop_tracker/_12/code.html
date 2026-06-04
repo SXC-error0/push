@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#40493e",
+                        "outline": "#707a6d",
+                        "surface": "#fff8f1",
+                        "inverse-surface": "#33302b",
+                        "inverse-primary": "#83da85",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#5eb3d8",
+                        "on-tertiary-container": "#004358",
+                        "surface-container": "#f4ede5",
+                        "primary-fixed-dim": "#83da85",
+                        "on-secondary-fixed": "#291800",
+                        "error": "#ba1a1a",
+                        "primary-container": "#66bb6a",
+                        "surface-container-low": "#f9f3eb",
+                        "background": "#fff8f1",
+                        "on-secondary-container": "#704800",
+                        "surface-dim": "#dfd9d1",
+                        "primary-fixed": "#9ff79f",
+                        "on-primary-container": "#004814",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#002105",
+                        "secondary-fixed": "#ffddb4",
+                        "surface-tint": "#126d27",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#bfcaba",
+                        "on-primary-fixed-variant": "#005318",
+                        "tertiary-fixed-dim": "#7ed1f7",
+                        "tertiary": "#006685",
+                        "surface-container-highest": "#e8e1da",
+                        "secondary-fixed-dim": "#ffb954",
+                        "secondary": "#835500",
+                        "secondary-container": "#feb64c",
+                        "inverse-on-surface": "#f7f0e8",
+                        "on-tertiary-fixed": "#001f2a",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "on-background": "#1e1b17",
+                        "tertiary-fixed": "#bee9ff",
+                        "on-surface": "#1e1b17",
+                        "surface-variant": "#e8e1da",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fff8f1",
+                        "on-primary": "#ffffff",
+                        "primary": "#126d27",
+                        "on-tertiary-fixed-variant": "#004d65",
+                        "surface-container-high": "#eee7df",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "12px",
+                        "2xl": "16px",
+                        "3xl": "24px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "sm": "8px",
+                        "margin-mobile": "20px",
+                        "gutter": "12px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-caps": ["Be Vietnam Pro"],
+                        "display-mobile": ["Be Vietnam Pro"],
+                        "headline-md": ["Be Vietnam Pro"],
+                        "display-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "500"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "display-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sticker-border {
+            border: 2px solid rgba(0, 0, 0, 0.08);
+        }
+        .hard-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(18, 109, 39, 0.2);
+        }
+        .card-tilt-left { transform: rotate(-1.5deg); }
+        .card-tilt-right { transform: rotate(1.5deg); }
+        .bg-pattern {
+            background-image: radial-gradient(#66bb6a 0.5px, transparent 0.5px);
+            background-size: 12px 12px;
+            opacity: 0.1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-lg text-on-surface selection:bg-primary-container min-h-screen flex flex-col items-center">
+<!-- Top Navigation (Shell suppressed for focused shareable view) -->
+<nav class="w-full top-0 sticky bg-background flex justify-between items-center px-margin-mobile py-sm z-10 border-b-2 border-outline-variant">
+<div class="flex items-center gap-sm transition-transform active:scale-95 cursor-pointer">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+<span class="font-display-mobile text-display-mobile text-primary tracking-tight">拉了么</span>
+</div>
+<div class="flex items-center gap-md">
+<button class="bg-secondary-container text-on-secondary-container px-md py-xs rounded-full font-label-caps text-label-caps border-2 border-secondary/20 transition-transform active:scale-95">
+                保存
+            </button>
+<span class="material-symbols-outlined text-on-surface-variant">share</span>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 w-full max-w-md px-margin-mobile py-lg flex flex-col items-center gap-xl pb-24">
+<!-- The Report Card -->
+<div class="w-full bg-surface-container-low rounded-3xl p-md sticker-border relative overflow-hidden flex flex-col gap-lg shadow-xl">
+<!-- Aesthetic Background Accents -->
+<div class="absolute inset-0 bg-pattern pointer-events-none"></div>
+<!-- Header Section -->
+<div class="relative z-10 flex flex-col items-center text-center gap-xs">
+<div class="bg-primary-container text-on-primary-container px-lg py-xs rounded-full font-label-caps text-label-caps border-2 border-primary sticker-border inline-block mb-sm">
+                    2023.10.23 - 10.29
+                </div>
+<h1 class="font-display-mobile text-display-mobile text-primary tracking-tight">Your Poop Week in Review</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">本周又是“肠”通无阻的一周呢！</p>
+</div>
+<!-- Visual Hero Sticker -->
+<div class="relative z-10 flex justify-center py-sm">
+<div class="w-32 h-32 bg-tertiary-container rounded-full flex items-center justify-center border-4 border-on-tertiary-container sticker-border card-tilt-right overflow-hidden shadow-lg">
+<img alt="Hero Graphic" class="w-24 h-24" data-alt="A whimsical 3D style character illustration of a smiling green blob wearing a tiny crown and holding a golden trophy. The character is set against a vibrant mint green and sky blue background with floating 3D emoji elements like sparkles and tiny clouds. The lighting is soft and cheerful, creating a playful cartoon aesthetic consistent with a high-end Gen-Z lifestyle app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx3E3AlAI3OhvjlWFNyi9qmIXsPqQlHbLJHZJr05pOrF8ukFv18MRmwJOGfnZn0FY9mR_lQQP1r41dlkOTJ4uH_ahKhEHpg4i8ZwgaQ86uu5NFTPil-1Kp-nb7wtMeU9x2ppqRHdOguwqsJ-KMX1e-3u9l0HRcq0Evy0S4FVZYGpJq891fJ08s2w1a9Cm_hHlVbiK-J5h06OUhW3-EQx-ht5SX1OeZ9uG15LBIGH2UgRjieFtm62iS_2Mm5nRWIepFsvUa0OOM30nH"/>
+</div>
+</div>
+<!-- Stats Grid (Bento Style) -->
+<div class="grid grid-cols-2 gap-md relative z-10">
+<!-- Stat 1 -->
+<div class="col-span-1 bg-surface rounded-2xl p-md border-2 border-outline-variant flex flex-col gap-xs card-tilt-left hard-shadow">
+<div class="flex items-center gap-xs">
+<span class="text-2xl">🏆</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">释放次数</span>
+</div>
+<div class="flex flex-col">
+<span class="font-display-mobile text-display-mobile text-primary">7</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant opacity-70">Total Releases</span>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="col-span-1 bg-surface rounded-2xl p-md border-2 border-outline-variant flex flex-col gap-xs card-tilt-right hard-shadow">
+<div class="flex items-center gap-xs">
+<span class="text-2xl">☁️</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">冥想时间</span>
+</div>
+<div class="flex flex-col">
+<span class="font-display-mobile text-display-mobile text-tertiary">2.5<span class="text-sm font-bold">h</span></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant opacity-70">Total Meditation</span>
+</div>
+</div>
+<!-- Stat 3: Highlight Row -->
+<div class="col-span-2 bg-secondary-container rounded-2xl p-md border-2 border-on-secondary-container/20 flex items-center justify-between hard-shadow">
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-xs">
+<span class="text-2xl">💰</span>
+<span class="font-label-caps text-label-caps text-on-secondary-container">带薪如厕收益</span>
+</div>
+<div class="flex flex-col">
+<span class="font-display-lg text-display-lg text-on-secondary-container">¥ 35.5</span>
+<span class="font-label-caps text-label-caps text-on-secondary-container opacity-70">Earned while Pooping</span>
+</div>
+</div>
+<div class="flex flex-col items-center text-on-secondary-container">
+<span class="material-symbols-outlined text-4xl" data-weight="fill">trending_up</span>
+<span class="font-label-caps text-label-caps">超越 92% 同事</span>
+</div>
+</div>
+</div>
+<!-- Title & Achievement -->
+<div class="bg-surface rounded-2xl p-lg border-2 border-primary/20 flex flex-col items-center gap-sm text-center relative z-10">
+<span class="font-label-caps text-label-caps text-primary bg-primary/10 px-md py-1 rounded-full">获得周称号</span>
+<h2 class="font-display-lg text-display-lg text-primary leading-tight">Guardian of the Office Toilet</h2>
+<h3 class="font-headline-md text-headline-md text-on-surface">“办公室马桶守护者”</h3>
+</div>
+<!-- Footer Share Section -->
+<div class="flex items-center justify-between pt-md border-t-2 border-dashed border-outline-variant relative z-10">
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-xs">
+<div class="w-8 h-8 rounded-full bg-primary-container sticker-border flex items-center justify-center overflow-hidden">
+<img alt="Avatar" class="w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGh9E9_0wSnJg7c2F3Eqnviw4vv9F2_uyywSNBpCuKkLDm2UVJ5HWxmivSREvZ1w2RQLl6Jd2kaMQrSIVuINMXYMbO8Hq5-oN_ca1yBEFcVSXke5V-xQz-6MtWxVgzYRpb8DPVsmmEH8RxIF_KiM-_5dHvz064Ydp1Yf6QsRVZXlFEyl6-6N07u58saEtMKfh_TuL9nZDTIUhlVrrSoKlLZk3YNstESRIiYW_N3mW8ZXqB--tust4SPPlE60-AXmHQzxsVC84LHcYh"/>
+</div>
+<span class="font-body-sm text-body-sm font-bold">肠道总督 @Felix</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">来自 拉了么 - 发现如厕之美</span>
+</div>
+<!-- QR Code Placeholder -->
+<div class="w-16 h-16 bg-white p-1 rounded-lg border-2 border-outline-variant flex items-center justify-center">
+<div class="w-full h-full bg-surface-variant flex flex-wrap content-start opacity-30">
+<div class="w-1/2 h-1/2 bg-on-surface"></div>
+<div class="w-1/4 h-1/4 bg-on-surface"></div>
+<div class="w-1/4 h-1/4"></div>
+<div class="w-1/4 h-1/4 bg-on-surface"></div>
+<div class="w-1/2 h-1/2"></div>
+<div class="w-1/4 h-1/4 bg-on-surface"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Call to Action -->
+<div class="w-full flex flex-col gap-md items-center">
+<button class="w-full bg-primary text-on-primary py-md rounded-full font-headline-md text-headline-md flex items-center justify-center gap-sm hard-shadow transition-all active:translate-x-1 active:translate-y-1 active:shadow-none" onclick="saveCard()">
+<span class="material-symbols-outlined">download</span>
+                保存分享卡片
+            </button>
+<button class="flex items-center gap-xs text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">auto_awesome</span>
+<span class="font-label-caps text-label-caps">查看本周成就墙</span>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation (Filtered for Focused Action) -->
+<div class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface/80 backdrop-blur-md rounded-t-3xl border-t-2 border-outline-variant">
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 transition-all duration-200 ease-in-out active:scale-90">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps">首页</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 border-2 border-primary transition-all duration-200 ease-in-out active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-label-caps text-label-caps">统计</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 transition-all duration-200 ease-in-out active:scale-90">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-caps text-label-caps">地图</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 transition-all duration-200 ease-in-out active:scale-90">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-caps text-label-caps">发现</span>
+</div>
+</div>
+<script>
+        // Micro-interaction for the card save simulation
+        function saveCard() {
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin">sync</span> 保存中...`;
+            btn.classList.add('opacity-80');
+            
+            setTimeout(() => {
+                btn.innerHTML = `<span class="material-symbols-outlined">check_circle</span> 已保存到相册`;
+                btn.classList.replace('bg-primary', 'bg-secondary');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.replace('bg-secondary', 'bg-primary');
+                    btn.classList.remove('opacity-80');
+                }, 2000);
+            }, 1200);
+        }
+
+        // Add subtle parallax effect to the card on tilt
+        document.addEventListener('mousemove', (e) => {
+            const card = document.querySelector('.bg-surface-container-low');
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+    </script>
+</body></html>

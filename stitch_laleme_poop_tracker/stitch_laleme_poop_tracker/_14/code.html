@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#66bb6a",
+                        "tertiary-fixed": "#bee9ff",
+                        "primary-fixed-dim": "#83da85",
+                        "tertiary-container": "#5eb3d8",
+                        "outline": "#707a6d",
+                        "secondary-container": "#feb64c",
+                        "inverse-primary": "#83da85",
+                        "inverse-on-surface": "#f7f0e8",
+                        "tertiary-fixed-dim": "#7ed1f7",
+                        "outline-variant": "#bfcaba",
+                        "on-secondary-fixed": "#291800",
+                        "inverse-surface": "#33302b",
+                        "primary-fixed": "#9ff79f",
+                        "on-primary-fixed-variant": "#005318",
+                        "on-primary-fixed": "#002105",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e8e1da",
+                        "surface-bright": "#fff8f1",
+                        "secondary": "#835500",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eee7df",
+                        "on-secondary-container": "#704800",
+                        "on-primary-container": "#004814",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#004d65",
+                        "surface-tint": "#126d27",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "background": "#fff8f1",
+                        "surface-container-low": "#f9f3eb",
+                        "on-surface-variant": "#40493e",
+                        "on-background": "#1e1b17",
+                        "surface-dim": "#dfd9d1",
+                        "secondary-fixed-dim": "#ffb954",
+                        "primary": "#126d27",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#006685",
+                        "surface": "#fff8f1",
+                        "surface-variant": "#e8e1da",
+                        "surface-container": "#f4ede5",
+                        "on-tertiary-fixed": "#001f2a",
+                        "on-tertiary-container": "#004358",
+                        "secondary-fixed": "#ffddb4",
+                        "on-surface": "#1e1b17"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "sm": "8px",
+                        "gutter": "12px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Be Vietnam Pro"],
+                        "label-caps": ["Be Vietnam Pro"],
+                        "display-mobile": ["Be Vietnam Pro"],
+                        "headline-md": ["Be Vietnam Pro"],
+                        "display-lg": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "display-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .sticker-card {
+            border: 2px solid #dfd9d1;
+        }
+        .hard-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1);
+        }
+        .hard-shadow-active:active {
+            box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.1);
+            transform: translate(2px, 2px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-lg text-on-background min-h-screen pb-32">
+<!-- Top Navigation Bar -->
+<header class="w-full top-0 sticky z-50 bg-surface border-b-2 border-outline-variant flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<h1 class="font-display-mobile text-display-mobile text-primary">屎币小店</h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-bold flex items-center gap-1 border-2 border-on-secondary-container/10">
+<span class="text-lg">🪙</span>
+<span class="font-label-caps text-label-caps">260</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</div>
+</header>
+<main class="px-margin-mobile pt-md space-y-xl">
+<!-- Featured Hero Section -->
+<section class="relative">
+<div class="bg-tertiary-container rounded-xl sticker-card hard-shadow overflow-hidden p-md flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<span class="bg-error text-on-error font-label-caps text-label-caps px-2 py-1 rounded-full">SEASON LIMITED</span>
+<span class="text-4xl rotate-3">👑</span>
+</div>
+<div class="h-40 w-full rounded-lg bg-surface-container-lowest overflow-hidden">
+<img alt="Golden Toilet Skin" class="w-full h-full object-cover" data-alt="A luxurious and humorous cartoon-style golden toilet shimmering with bright sparkles. The art style is playful and high-contrast, following a sticker aesthetic with bold outlines and vibrant colors. The background is a soft, creamy peach color. The lighting is warm and celebratory, making the golden surface glow with metallic highlights. This digital illustration targets a youthful Gen-Z audience with its irreverent and fun tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ8gq8pJ9Fn-BrwxZARae-oLD2M34MmJXIOk-6YgA0r9US5GhFdSw4Qay5337uqwxq6NbqqmTijz4ZFTsdIxmjh_iMpHZ6IbioUSwh2AoLMw-GkMyCDCZwSeg1gpILO-IS1YLIdoXw3Y0wydTsK9yCv0kQ32nn5gYy0_jUAH7kwbSBDVzmSi2T2q8Nu30eqi5uloZtrlcmATKq6feHRtRldn66o-KBZ-M6OKFfsD0J1LAf1l2_hzrVyz-Dx-3eQAnbROGfUw9CBh-l"/>
+</div>
+<div class="space-y-1">
+<h2 class="font-headline-md text-headline-md-mobile text-on-tertiary-container">Golden Toilet Skin</h2>
+<p class="text-body-sm font-body-sm text-on-tertiary-container/80">成为厕所里最闪亮的星</p>
+</div>
+<div class="flex justify-between items-center mt-2">
+<div class="flex items-center gap-1 font-bold text-on-tertiary-container">
+<span>🪙</span> <span>1500</span>
+</div>
+<button class="bg-primary-container text-on-primary-container px-lg py-sm rounded-full font-bold hard-shadow hard-shadow-active transition-all">
+                        兑换
+                    </button>
+</div>
+</div>
+</section>
+<!-- Avatar Frames Category -->
+<section class="space-y-md">
+<div class="flex items-center gap-2">
+<span class="text-xl">✨</span>
+<h3 class="font-headline-md text-headline-md-mobile">头像框 (Avatar Frames)</h3>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest p-md rounded-xl sticker-card hard-shadow flex flex-col items-center text-center gap-sm">
+<div class="w-20 h-20 bg-primary-fixed-dim/20 rounded-full flex items-center justify-center border-4 border-dashed border-primary-container">
+<span class="text-4xl">🌈</span>
+</div>
+<div class="space-y-xs">
+<p class="font-bold">Rainbow Poop</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">🪙 120</p>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container py-xs rounded-full font-bold text-sm hard-shadow hard-shadow-active">购买</button>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest p-md rounded-xl sticker-card hard-shadow flex flex-col items-center text-center gap-sm">
+<div class="w-20 h-20 bg-tertiary-fixed-dim/20 rounded-full flex items-center justify-center border-4 border-solid border-tertiary-container">
+<span class="text-4xl">💫</span>
+</div>
+<div class="space-y-xs">
+<p class="font-bold">Neon Flush</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">🪙 180</p>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container py-xs rounded-full font-bold text-sm hard-shadow hard-shadow-active">购买</button>
+</div>
+</div>
+</section>
+<!-- Quirky Titles Category -->
+<section class="space-y-md">
+<div class="flex items-center gap-2">
+<span class="text-xl">🏆</span>
+<h3 class="font-headline-md text-headline-md-mobile">趣味称号 (Quirky Titles)</h3>
+</div>
+<div class="space-y-md">
+<div class="bg-surface-container-low p-md rounded-xl sticker-card border-l-8 border-l-secondary-container flex justify-between items-center">
+<div class="flex gap-md items-center">
+<span class="text-2xl">🌿</span>
+<div>
+<p class="font-bold">Master of Relieving</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">释放大师</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-bold">🪙 50</span>
+<button class="bg-primary-container text-on-primary-container px-md py-sm rounded-full font-bold text-sm hard-shadow-active">购买</button>
+</div>
+</div>
+<div class="bg-surface-container-low p-md rounded-xl sticker-card border-l-8 border-l-tertiary-container flex justify-between items-center">
+<div class="flex gap-md items-center">
+<span class="text-2xl">⚡</span>
+<div>
+<p class="font-bold">Office Guardian</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">带薪摸鱼王</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-bold">🪙 80</span>
+<button class="bg-primary-container text-on-primary-container px-md py-sm rounded-full font-bold text-sm hard-shadow-active">购买</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Toilet Skins Category -->
+<section class="space-y-md">
+<div class="flex items-center gap-2">
+<span class="text-xl">☁️</span>
+<h3 class="font-headline-md text-headline-md-mobile">马桶皮肤 (Toilet Skins)</h3>
+</div>
+<div class="grid grid-cols-1 gap-md">
+<div class="bg-surface-container-lowest p-gutter rounded-xl sticker-card flex items-center gap-md">
+<div class="w-24 h-24 rounded-lg bg-tertiary-fixed overflow-hidden flex-shrink-0">
+<img alt="Cloud Skin" class="w-full h-full object-cover" data-alt="A stylized cartoon-style toilet skin designed with fluffy, pastel blue and white cloud patterns. The aesthetic is clean, dream-like, and cute, fitting a mobile game UI. Bold dark outlines define the shape like a physical sticker. The lighting is soft and diffuse, highlighting the soft textures. The overall mood is relaxing and whimsical, avoiding any clinical medical vibes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4--5sv3deKzLTNy-A2zZqZyCNbe1w7FmRNf8u00pkHwKrw0cNA7OUAi4SUgcfMUqRanBXw9bhgL4UtjPSwt7gr7kCh6pqpQOfpPBP05ZcyNuDAYwK0c9kLStijVBxuLmKE7s51xY_xblf1nNIMC0rQYKiWYJmmeilt5PUyN6Jc_fErXF6CbLnVuZfz3GMlrUlxZh6T9LhkCgoXLPl14RGGQzbQ_GZPma-cuMDF8hvBHMEZ-EE1mUkRdx9WsnWLFzSDT8LDfSTiq2U"/>
+</div>
+<div class="flex-grow space-y-sm">
+<div>
+<h4 class="font-bold">云朵工厂 (Cloud Factory)</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">轻盈如云的体验</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-bold">🪙 450</span>
+<button class="bg-primary-container text-on-primary-container px-lg py-xs rounded-full font-bold text-sm hard-shadow hard-shadow-active">兑换</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-low border-t-2 border-outline-variant shadow-[0_-4px_0_0_rgba(0,0,0,0.05)] flex justify-around items-center h-20 px-4 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-primary-container/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-caps text-label-caps">首页</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-primary-container/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-label-caps text-label-caps">数据</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-primary-container/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="distance">distance</span>
+<span class="font-label-caps text-label-caps">地图</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 shadow-[4px_4px_0_0_rgba(18,109,39,0.2)]" href="#">
+<span class="material-symbols-outlined" data-icon="explore" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label-caps text-label-caps">发现</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+
+        // Floating effect for some emojis
+        const floatEmojis = () => {
+            const emojis = document.querySelectorAll('.rotate-3');
+            emojis.forEach(emoji => {
+                let deg = 3;
+                setInterval(() => {
+                    deg = deg === 3 ? -3 : 3;
+                    emoji.style.transform = `rotate(${deg}deg)`;
+                    emoji.style.transition = 'transform 0.5s ease-in-out';
+                }, 1000);
+            });
+        };
+        floatEmojis();
+    </script>
+</body></html>
